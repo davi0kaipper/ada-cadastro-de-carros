@@ -16,6 +16,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import model.Car;
 import repository.CarsRepository;
+
 import java.util.List;
 
 @Path("/cars")
