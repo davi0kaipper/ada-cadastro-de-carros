@@ -2,13 +2,30 @@ package model;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity(name = "cars")
 public class Car {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @JsonProperty("brand")
     private String brand;
+    @JsonProperty("model")
     private String model;
+    @JsonProperty("color")
     private String color;
+    @JsonProperty("transmission")
     private String transmission;
+    @JsonProperty("ano")
     private int ano;
+    @JsonProperty("price")
     private BigDecimal price;
 
     public Car(String brand,
@@ -62,7 +79,7 @@ public class Car {
         return ano;
     }
 
-    public void setAno(int ano) {
+    public void setYear(int ano) {
         this.ano = ano;
     }
 
