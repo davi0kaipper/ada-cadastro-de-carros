@@ -12,12 +12,7 @@ import jakarta.ws.rs.core.Response;
 import model.Car;
 import repository.CarsRepository;
 
-import java.awt.*;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-
-import static jakarta.ws.rs.client.Entity.entity;
 
 @Path("/cars")
 public class CarsController {
