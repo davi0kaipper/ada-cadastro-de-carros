@@ -1,0 +1,17 @@
+import { Component } from '@angular/core';
+import { NgFor } from '@angular/common';
+import { CarApiService } from '../services/car-api.service';
+
+@Component({
+  selector: 'app-car-list',
+  imports: [ NgFor ],
+  templateUrl: './car-list.component.html',
+  providers: [ CarApiService ]
+})
+export class CarListComponent {
+  cars!: any[];
+
+  constructor(carApiService: CarApiService) {
+    carApiService.getCars().subscribe((cars: any) => this.cars = cars);
+  }
+}

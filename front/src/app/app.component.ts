@@ -5,16 +5,10 @@ import { CarApiService } from './services/car-api.service';
 
 @Component({
   selector: 'app-root',
-  imports: [ RouterOutlet, NgFor ],
+  imports: [ RouterOutlet ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  providers: [ CarApiService ]
 })
 export class AppComponent {
   title = 'front';
-  cars!: any[];
-
-  constructor(carApiService: CarApiService) {
-    carApiService.getCars().subscribe((cars: any) => this.cars = cars);
-  }
 }
