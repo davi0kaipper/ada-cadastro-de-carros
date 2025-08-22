@@ -33,16 +33,17 @@ public class CarsController {
     @GET
     public Response getCars () {
         List<Car> cars = repository.findAll().list();
+        List<CarDTO> carsDTO = cars.stream().map(CarMapper::toDTO).toList();
 
         return Response.status(Response.Status.OK)
-                .entity(cars)
+                .entity(carsDTO)
                 .build();
     }
 
     @GET
     @Path("/{id}")
     public Response getCarById(@PathParam("id") Long carId) {
-        Car car = repository.findById(carId);
+        CarDTO car = CarMapper.toDTO(repository.findById(carId));
         if (car == null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity("Car not found")
@@ -76,7 +77,7 @@ public class CarsController {
         existingCar.setModel(car.getModel());
         existingCar.setColor(car.getColor());
         existingCar.setTransmission(car.getTransmission());
-        existingCar.setYear(car.getAno());
+        existingCar.setYear(car.getYear());
         existingCar.setPrice(car.getPrice());
 
         repository.persist(existingCar);
@@ -108,8 +109,8 @@ public class CarsController {
         if (carDTO.getTransmission() != null) {
             existingCar.setTransmission(carDTO.getTransmission());
         }
-        if (carDTO.getAno() != 0) {
-            existingCar.setYear(carDTO.getAno());
+        if (carDTO.getYear() != 0) {
+            existingCar.setYear(carDTO.getYear());
         }
         if (carDTO.getPrice() != null) {
             existingCar.setPrice(carDTO.getPrice());

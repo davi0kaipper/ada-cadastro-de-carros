@@ -11,7 +11,6 @@ import jakarta.persistence.Id;
 
 @Entity(name = "cars")
 public class Car {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -79,7 +78,7 @@ public class Car {
         this.transmission = transmission;
     }
 
-    public int getAno() {
+    public int getYear() {
         return ano;
     }
 

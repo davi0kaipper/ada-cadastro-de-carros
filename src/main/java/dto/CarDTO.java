@@ -4,66 +4,42 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 
-public class CarDTO {
-
+public record CarDTO(
     @JsonProperty("brand")
-    private String brand;
+    String brand,
     @JsonProperty("model")
-    private String model;
+    String model,
     @JsonProperty("color")
-    private String color;
+    String color,
     @JsonProperty("transmission")
-    private String transmission;
+    String transmission,
     @JsonProperty("ano")
-    private int ano;
+    int ano,
     @JsonProperty("price")
-    private BigDecimal price;
-
+    BigDecimal price
+) {
     public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
+        return this.brand;
     }
 
     public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
+        return this.model;
     }
 
     public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
+        return this.color;
     }
 
     public String getTransmission() {
-        return transmission;
+        return this.transmission;
     }
 
-    public void setTransmission(String transmission) {
-        this.transmission = transmission;
-    }
-
-    public int getAno() {
-        return ano;
-    }
-
-    public void setAno(int ano) {
-        this.ano = ano;
+    public int getYear() {
+        return this.ano;
     }
 
     public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
 }
