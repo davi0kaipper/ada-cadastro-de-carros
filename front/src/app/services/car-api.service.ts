@@ -11,6 +11,14 @@ export class CarApiService {
   constructor(http: HttpClient) {this.http = http;}
   
   getCars() {
-    return this.http.get(`${environment.carAPI}/cars`)
+    return this.http.get(`${environment.carAPI}/cars`);
+  }
+
+  getCarsById(id: number) {
+    return this.http.get(`${environment.carAPI}/cars/${id}`);
+  }
+
+  putCar(car: Car) {
+    this.http.put(`${environment.carAPI}/cars`, car);
   }
 }

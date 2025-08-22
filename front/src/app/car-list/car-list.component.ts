@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
 import { CarApiService } from '../services/car-api.service';
 
 @Component({
   selector: 'app-car-list',
-  imports: [ NgFor ],
+  imports: [ NgIf, NgFor ],
   templateUrl: './car-list.component.html',
   providers: [ CarApiService ]
 })
 export class CarListComponent {
   cars!: any[];
 
-  constructor(carApiService: CarApiService) {
-    carApiService.getCars().subscribe((cars: any) => this.cars = cars);
+  constructor(private carApiService: CarApiService) {
+    this.carApiService.getCars().subscribe((cars: any) => this.cars = cars);
   }
+
 }
