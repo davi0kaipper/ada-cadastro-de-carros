@@ -43,12 +43,14 @@ public class CarsController {
     @GET
     @Path("/{id}")
     public Response getCarById(@PathParam("id") Long carId) {
-        CarDTO car = CarMapper.toDTO(repository.findById(carId));
+        Car car = repository.findById(carId);
         if (car == null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity("Car not found")
                     .build();
         }
+
+	CarDTO carDTO = CarMapper.toDTO(car);
         return Response.status(Response.Status.OK)
                 .entity(car)
                 .build();
@@ -66,19 +68,18 @@ public class CarsController {
     @Path("/{id}")
     @Transactional
     public Response updateCar(@PathParam("id") Long carId, CarDTO carDTO) {
-        Car car = CarMapper.toEntity(carDTO);
         Car existingCar = repository.findById(carId);
         if (existingCar == null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity("Car not found")
                     .build();
         }
-        existingCar.setBrand(car.getBrand());
-        existingCar.setModel(car.getModel());
-        existingCar.setColor(car.getColor());
-        existingCar.setTransmission(car.getTransmission());
-        existingCar.setYear(car.getYear());
-        existingCar.setPrice(car.getPrice());
+        existingCar.setBrand(carDTO.brand());
+        existingCar.setModel(carDTO.model());
+        existingCar.setColor(carDTO.color());
+        existingCar.setTransmission(carDTO.transmission());
+        existingCar.setYear(carDTO.carYear());
+        existingCar.setPrice(carDTO.price());
 
         repository.persist(existingCar);
 
@@ -97,23 +98,23 @@ public class CarsController {
                     .entity("Car not found")
                     .build();
         }
-        if (carDTO.getBrand() != null) {
-            existingCar.setBrand(carDTO.getBrand());
+        if (carDTO.brand() != null) {
+            existingCar.setBrand(carDTO.brand());
         }
-        if (carDTO.getModel() != null) {
-            existingCar.setModel(carDTO.getModel());
+        if (carDTO.model() != null) {
+            existingCar.setModel(carDTO.model());
         }
-        if (carDTO.getColor() != null) {
-            existingCar.setColor(carDTO.getColor());
+        if (carDTO.color() != null) {
+            existingCar.setColor(carDTO.color());
         }
-        if (carDTO.getTransmission() != null) {
-            existingCar.setTransmission(carDTO.getTransmission());
+        if (carDTO.transmission() != null) {
+            existingCar.setTransmission(carDTO.transmission());
         }
-        if (carDTO.getYear() != 0) {
-            existingCar.setYear(carDTO.getYear());
+        if (carDTO.carYear() != 0) {
+            existingCar.setYear(carDTO.carYear());
         }
-        if (carDTO.getPrice() != null) {
-            existingCar.setPrice(carDTO.getPrice());
+        if (carDTO.price() != null) {
+            existingCar.setPrice(carDTO.price());
         }
         return Response.status(Response.Status.OK)
                 .entity(existingCar)

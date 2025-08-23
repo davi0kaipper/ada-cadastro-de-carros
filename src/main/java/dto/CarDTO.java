@@ -13,33 +13,8 @@ public record CarDTO(
     String color,
     @JsonProperty("transmission")
     String transmission,
-    @JsonProperty("ano")
-    int ano,
+    @JsonProperty("carYear")
+    int carYear,
     @JsonProperty("price")
     BigDecimal price
-) {
-    public String getBrand() {
-        return this.brand;
-    }
-
-    public String getModel() {
-        return this.model;
-    }
-
-    public String getColor() {
-        return this.color;
-    }
-
-    public String getTransmission() {
-        return this.transmission;
-    }
-
-    public int getYear() {
-        return this.ano;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-}
+) {}

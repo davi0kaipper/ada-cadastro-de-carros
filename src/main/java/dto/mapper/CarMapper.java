@@ -7,12 +7,12 @@ public class CarMapper {
 
     public static Car toEntity(CarDTO carDTO) {
         Car car = new Car();
-        car.setBrand(carDTO.getBrand());
-        car.setModel(carDTO.getModel());
-        car.setYear(carDTO.getYear());
-        car.setColor(carDTO.getColor());
-        car.setTransmission(carDTO.getTransmission());
-        car.setPrice(carDTO.getPrice());
+        car.setBrand(carDTO.brand());
+        car.setModel(carDTO.model());
+        car.setYear(carDTO.carYear());
+        car.setColor(carDTO.color());
+        car.setTransmission(carDTO.transmission());
+        car.setPrice(carDTO.price());
         return car;
     }
 

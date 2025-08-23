@@ -22,8 +22,8 @@ public class Car {
     private String color;
     @JsonProperty("transmission")
     private String transmission;
-    @JsonProperty("ano")
-    private int ano;
+    @JsonProperty("carYear")
+    private int carYear;
     @JsonProperty("price")
     private BigDecimal price;
 
@@ -31,13 +31,13 @@ public class Car {
                String model,
                String color,
                String transmission,
-               int ano,
+               int carYear,
                BigDecimal price) {
         this.brand = brand;
         this.model = model;
         this.color = color;
         this.transmission = transmission;
-        this.ano = ano;
+        this.carYear = carYear;
         this.price = price;
     }
     public Car() {}
@@ -79,11 +79,11 @@ public class Car {
     }
 
     public int getYear() {
-        return ano;
+        return carYear;
     }
 
     public void setYear(int ano) {
-        this.ano = ano;
+        this.carYear = carYear;
     }
 
     public BigDecimal getPrice() {
