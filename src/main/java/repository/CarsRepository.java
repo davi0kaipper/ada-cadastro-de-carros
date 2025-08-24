@@ -6,3 +6,4 @@ import model.Car;
 
 @ApplicationScoped
 public class CarsRepository implements PanacheRepository<Car> {}
+

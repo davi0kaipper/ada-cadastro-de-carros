@@ -1,5 +1,6 @@
 package controller;
 
+import Service.CarService;
 import dto.CarDTO;
 import dto.mapper.CarMapper;
 import jakarta.transaction.Transactional;
@@ -15,6 +16,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import model.Car;
+import org.jboss.resteasy.reactive.RestPath;
 import repository.CarsRepository;
 import java.util.List;
 
@@ -24,14 +26,16 @@ import java.util.List;
 public class CarsController {
 
     private final CarsRepository repository;
+    private final CarService carService;
 
-    public CarsController(CarsRepository repository) {
+    public CarsController(CarsRepository repository, CarService carService) {
         this.repository = repository;
+        this.carService = carService;
     }
 
     @GET
     public Response getCars () {
-        List<Car> cars = repository.findAll().list();
+        List<CarDTO> cars = carService.getAll();
 
         return Response.status(Response.Status.OK)
                 .entity(cars)
@@ -40,15 +44,9 @@ public class CarsController {
 
     @GET
     @Path("/{id}")
-    public Response getCarById(@PathParam("id") Long carId) {
-        Car car = repository.findById(carId);
-        if (car == null) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Car not found")
-                    .build();
-        }
+    public Response getById(@RestPath Long id) {
         return Response.status(Response.Status.OK)
-                .entity(car)
+                .entity(carService.getById(id))
                 .build();
     }
 
@@ -56,79 +54,30 @@ public class CarsController {
     @Transactional
     public Response addCar(CarDTO carDTO) {
         repository.persist(CarMapper.toEntity(carDTO));
-
         return Response.status(Response.Status.CREATED).entity(carDTO).build();
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
-    public Response updateCar(@PathParam("id") Long carId, CarDTO carDTO) {
-        Car car = CarMapper.toEntity(carDTO);
-        Car existingCar = repository.findById(carId);
-        if (existingCar == null) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Car not found")
-                    .build();
-        }
-        existingCar.setBrand(car.getBrand());
-        existingCar.setModel(car.getModel());
-        existingCar.setColor(car.getColor());
-        existingCar.setTransmission(car.getTransmission());
-        existingCar.setYear(car.getAno());
-        existingCar.setPrice(car.getPrice());
-
-        repository.persist(existingCar);
-
-        return Response.status(Response.Status.OK)
-                .entity(existingCar)
-                .build();
+    public Response update(@RestPath Long id, CarDTO carDTO) {
+        carService.update(id, carDTO);
+        return Response.status(Response.Status.OK).build();
     }
 
     @PATCH
     @Path("/{id}")
     @Transactional
-    public Response patchCar(@PathParam("id") Long carId, CarDTO carDTO) {
-        Car existingCar = repository.findById(carId);
-        if (existingCar == null) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Car not found")
-                    .build();
-        }
-        if (carDTO.getBrand() != null) {
-            existingCar.setBrand(carDTO.getBrand());
-        }
-        if (carDTO.getModel() != null) {
-            existingCar.setModel(carDTO.getModel());
-        }
-        if (carDTO.getColor() != null) {
-            existingCar.setColor(carDTO.getColor());
-        }
-        if (carDTO.getTransmission() != null) {
-            existingCar.setTransmission(carDTO.getTransmission());
-        }
-        if (carDTO.getAno() != 0) {
-            existingCar.setYear(carDTO.getAno());
-        }
-        if (carDTO.getPrice() != null) {
-            existingCar.setPrice(carDTO.getPrice());
-        }
-        return Response.status(Response.Status.OK)
-                .entity(existingCar)
-                .build();
+    public Response updatePartial(@RestPath Long id, CarDTO carDTO) {
+        carService.updatePartial(id, carDTO);
+        return Response.status(Response.Status.OK).build();
     }
 
     @DELETE
     @Path("/{id}")
     @Transactional
-    public Response deleteCar(@PathParam("id") Long carId) {
-        Car car = repository.findById(carId);
-        if (car == null) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Car not found")
-                    .build();
-        }
-        repository.delete(car);
+    public Response delete(@RestPath Long id) {
+        carService.delete(id);
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 }
