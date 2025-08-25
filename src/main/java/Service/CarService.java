@@ -26,6 +26,11 @@ public class CarService {
                 .list().stream().map(CarMapper::toDTO).toList();
     }
 
+    public void create(CarDTO carDTO) {
+        Car car = CarMapper.toEntity(carDTO);
+        repository.persist(car);
+    }
+
     public void update(Long id, CarDTO carDTO) {
         Car car = findById(id);
         CarMapper.updateCar(carDTO, car);

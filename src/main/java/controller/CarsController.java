@@ -1,8 +1,6 @@
 package controller;
 
-import Service.CarService;
 import dto.CarDTO;
-import dto.mapper.CarMapper;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -11,13 +9,11 @@ import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import model.Car;
 import org.jboss.resteasy.reactive.RestPath;
-import repository.CarsRepository;
+import Service.CarService;
 
 import java.util.List;
 
@@ -26,18 +22,15 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class CarsController {
 
-    private final CarsRepository repository;
     private final CarService carService;
 
-    public CarsController(CarsRepository repository, CarService carService) {
-        this.repository = repository;
+    public CarsController(CarService carService) {
         this.carService = carService;
     }
 
     @GET
     public Response getCars () {
         List<CarDTO> cars = carService.getAll();
-
         return Response.status(Response.Status.OK)
                 .entity(cars)
                 .build();
@@ -53,8 +46,8 @@ public class CarsController {
 
     @POST
     @Transactional
-    public Response addCar(CarDTO carDTO) {
-        repository.persist(CarMapper.toEntity(carDTO));
+    public Response create(CarDTO carDTO) {
+        carService.create(carDTO);
         return Response.status(Response.Status.CREATED).entity(carDTO).build();
     }
 
