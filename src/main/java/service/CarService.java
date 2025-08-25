@@ -1,4 +1,4 @@
-package Service;
+package service;
 
 import dto.CarDTO;
 import dto.mapper.CarMapper;

@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CarApiService } from './car-api.Service';
+import { CarApiService } from './car-api.service';
 
 describe('CarApiService', () => {
-  let Service: CarApiService;
+  let service: CarApiService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    Service = TestBed.inject(CarApiService);
+    service = TestBed.inject(CarApiService);
   });
 
   it('should be created', () => {
-    expect(Service).toBeTruthy();
+    expect(service).toBeTruthy();
   });
 });
