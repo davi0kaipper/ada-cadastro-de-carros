@@ -33,10 +33,9 @@ public class CarsController {
     @GET
     public Response getCars () {
         List<Car> cars = repository.findAll().list();
-        List<CarDTO> carsDTO = cars.stream().map(CarMapper::toDTO).toList();
 
         return Response.status(Response.Status.OK)
-                .entity(carsDTO)
+                .entity(cars)
                 .build();
     }
 
@@ -50,9 +49,9 @@ public class CarsController {
                     .build();
         }
 
-	CarDTO carDTO = CarMapper.toDTO(car);
+	    CarDTO carDTO = CarMapper.toDTO(car);
         return Response.status(Response.Status.OK)
-                .entity(car)
+                .entity(carDTO)
                 .build();
     }
 
@@ -84,7 +83,7 @@ public class CarsController {
         repository.persist(existingCar);
 
         return Response.status(Response.Status.OK)
-                .entity(existingCar)
+                .entity(carDTO)
                 .build();
     }
 
@@ -117,7 +116,7 @@ public class CarsController {
             existingCar.setPrice(carDTO.price());
         }
         return Response.status(Response.Status.OK)
-                .entity(existingCar)
+                .entity(carDTO)
                 .build();
     }
 

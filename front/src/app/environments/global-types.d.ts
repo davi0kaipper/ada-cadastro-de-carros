@@ -3,5 +3,5 @@ interface Car {
   model: string;
   color: string;
   transmission: string;
-  year: string;
+  carYear: string;
 }
