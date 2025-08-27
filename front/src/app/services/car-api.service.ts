@@ -18,7 +18,15 @@ export class CarApiService {
     return this.http.get(`${environment.carAPI}/cars/${id}`);
   }
 
-  putCar(car: Car) {
-    this.http.put(`${environment.carAPI}/cars`, car);
+  postCar(car: Car) {
+    return this.http.post(`${environment.carAPI}/cars`, car);
+  }
+
+  putCar(car: Car, id: number) {
+    return this.http.put(`${environment.carAPI}/cars/${id}`, car);
+  }
+
+  deleteCar(id: number) {
+    return this.http.delete(`${environment.carAPI}/cars/${id}`);
   }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
-import { CarApiService } from '../services/car-api.service';
+import { CarApiService } from '../../services/car-api.service';
 
 @Component({
   selector: 'app-car-list',
