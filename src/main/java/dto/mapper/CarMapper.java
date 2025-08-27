@@ -10,12 +10,12 @@ public class CarMapper {
             return null;
         }
         Car car = new Car();
-        car.setBrand(carDTO.getBrand());
-        car.setModel(carDTO.getModel());
-        car.setYear(carDTO.getAno());
-        car.setColor(carDTO.getColor());
-        car.setTransmission(carDTO.getTransmission());
-        car.setPrice(carDTO.getPrice());
+        car.setBrand(carDTO.brand());
+        car.setModel(carDTO.model());
+        car.setYear(carDTO.carYear());
+        car.setColor(carDTO.color());
+        car.setTransmission(carDTO.transmission());
+        car.setPrice(carDTO.price());
         return car;
     }
 
@@ -36,13 +36,13 @@ public class CarMapper {
         if (car == null) {
             return null;
         }
-        CarDTO carDTO = new CarDTO();
-        carDTO.setBrand(car.getBrand());
-        carDTO.setModel(car.getModel());
-        carDTO.setAno(car.getAno());
-        carDTO.setColor(car.getColor());
-        carDTO.setTransmission(car.getTransmission());
-        carDTO.setPrice(car.getPrice());
-        return carDTO;
+        
+        return new CarDTO(car.getBrand(),
+                          car.getModel(),
+                          car.getColor(),
+                          car.getTransmission(),
+                          car.getYear(),
+                          car.getPrice()
+                         );
     }
 }
