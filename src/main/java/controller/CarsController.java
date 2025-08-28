@@ -74,4 +74,5 @@ public class CarsController {
         carService.delete(id);
         return Response.status(Response.Status.NO_CONTENT).build();
     }
+
 }
