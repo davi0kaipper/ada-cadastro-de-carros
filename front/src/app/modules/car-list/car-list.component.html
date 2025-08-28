@@ -2,7 +2,7 @@
   <h3>Carros</h3>
   <p>Aqui está uma lista dos carros disponíveis. Clique em qualquer item para ver mais informações</p>
 </div> 
-<div class="d-flex align-items-flex-start justify-content-start">
+<div class="d-flex align-items-flex-start justify-content-between">
   <div class="col-6" *ngIf="cars; else noContent"> 
     <table class="table table-striped">
     <thead>
@@ -13,9 +13,9 @@
         </tr>
       </thead>
       <tbody *ngFor="let car of cars">
-        <tr (click)="onClick(car)">
-          <td class="text-center">{{car.brand}}</td>
-          <td class="text-center">{{car.model}}</td>
+        <tr>
+          <td class="text-center" (click)="onClick(car)">{{car.brand}}</td>
+          <td class="text-center" (click)="onClick(car)">{{car.model}}</td>
           <td class="text-center">
             <div class="btn-group">
               <button class="btn btn-primary" (click)="update(car.id)">
@@ -36,8 +36,8 @@
 </div>
 
 <ng-template #carInfo>
-  <div class="container">
-    <h4>Sobre o modelo</h4>
+  <div class="col-4">
+    <h4>Sobre o automóvel</h4>
     <dl>
       <dt>Veículo</dt>
       <dl>{{car.brand}} {{car.model}}</dl>
@@ -53,12 +53,12 @@
   </div>
 </ng-template>
 <ng-template #carUpdate>
-  <div class="col-8">
+  <div class="col-4">
   </div>
 </ng-template>
 
 <ng-template #noContent>
-  <p>Nenhum veículo disponível!</p>
+  <p>Nenhum veículo disponível!</p> <br/>
   <p>Tente mais tarde</p>
 </ng-template>
  

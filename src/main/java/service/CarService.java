@@ -43,23 +43,23 @@ public class CarService {
 
     public void updatePartial(Long id, CarDTO carDTO) {
         Car car = findById(id);
-        if (carDTO.getBrand() != null) {
-            car.setBrand(carDTO.getBrand());
+        if (carDTO.brand() != null) {
+            car.setBrand(carDTO.brand());
         }
-        if (carDTO.getModel() != null) {
-            car.setModel(carDTO.getModel());
+        if (carDTO.model() != null) {
+            car.setModel(carDTO.model());
         }
-        if (carDTO.getAno() != 0) {
-            car.setYear(carDTO.getAno());
+        if (carDTO.carYear() != 0) {
+            car.setYear(carDTO.carYear());
         }
-        if (carDTO.getColor() != null) {
-            car.setColor(carDTO.getColor());
+        if (carDTO.color() != null) {
+            car.setColor(carDTO.color());
         }
-        if (carDTO.getTransmission() != null) {
-            car.setTransmission(carDTO.getTransmission());
+        if (carDTO.transmission() != null) {
+            car.setTransmission(carDTO.transmission());
         }
-        if (carDTO.getPrice() != null) {
-            car.setPrice(carDTO.getPrice());
+        if (carDTO.price() != null) {
+            car.setPrice(carDTO.price());
         }
     }
 
