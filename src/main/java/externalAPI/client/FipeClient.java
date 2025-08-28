@@ -11,7 +11,6 @@ import jakarta.ws.rs.PathParam;
 
 @Path("/api/v2")
 @RegisterRestClient(configKey = "fipe-api")
-//@RegisterRestClient(baseUri = "https://fipe.parallelum.com.br")
 public interface FipeClient {
 
     @GET

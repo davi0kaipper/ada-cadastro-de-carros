@@ -8,6 +8,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.jboss.resteasy.reactive.RestPath;
 
 import java.util.List;
 
@@ -24,36 +25,36 @@ public class FipeController {
     }
 
     @GET
-    @Path("/brands")
-    public Response getAllBrands(){
-        List brands = List.of(fipeService.getBrands("cars"));
+    @Path("/{vehicleType}/brands")
+    public Response getBrands(@RestPath String vehicleType){
+        List brands = List.of(fipeService.getBrands(vehicleType));
         return Response.status(Response.Status.OK)
                 .entity(brands)
                 .build();
     }
 
     @GET
-    @Path("/models")
-    public Response getAllModels(){
-        List models = List.of(fipeService.getModels("cars", 22));
+    @Path("/{vehicleType}/brands/{brandId}/models")
+    public Response getAllModels(@RestPath String vehicleType, @RestPath int brandId){
+        List models = List.of(fipeService.getModels(vehicleType, brandId));
         return Response.status(Response.Status.OK)
                 .entity(models)
                 .build();
     }
 
     @GET
-    @Path("/years")
-    public Response getAllYears(){
-        List years = List.of(fipeService.getYears("cars", 22, 657));
+    @Path("/{vehicleType}/brands/{brandId}/models/{modelId}/years")
+    public Response getAllYears(@RestPath String vehicleType, @RestPath int brandId, @RestPath int modelId){
+        List years = List.of(fipeService.getYears(vehicleType, brandId, modelId));
         return Response.status(Response.Status.OK)
                 .entity(years)
                 .build();
     }
 
     @GET
-    @Path("/price")
-    public Response getPrice(){
-        List price = List.of(fipeService.getPrice("cars", 22, 657, "1985-1"));
+    @Path("/{vehicleType}/brands/{brandId}/models/{modelId}/years/{yearId}")
+    public Response getPrice(@RestPath String vehicleType, @RestPath int brandId, @RestPath int modelId, @RestPath String yearId){
+        List price = List.of(fipeService.getPrice(vehicleType, brandId, modelId, yearId));
         return Response.status(Response.Status.OK)
                 .entity(price)
                 .build();
