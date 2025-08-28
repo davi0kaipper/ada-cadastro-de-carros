@@ -37,7 +37,8 @@ public class CarMapper {
             return null;
         }
         
-        return new CarDTO(car.getBrand(),
+        return new CarDTO(car.getId(),
+                          car.getBrand(),
                           car.getModel(),
                           car.getColor(),
                           car.getTransmission(),

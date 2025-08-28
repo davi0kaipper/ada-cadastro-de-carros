@@ -14,17 +14,11 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @JsonProperty("brand")
     private String brand;
-    @JsonProperty("model")
     private String model;
-    @JsonProperty("color")
     private String color;
-    @JsonProperty("transmission")
     private String transmission;
-    @JsonProperty("carYear")
     private int carYear;
-    @JsonProperty("price")
     private BigDecimal price;
 
     public Car(String brand,
