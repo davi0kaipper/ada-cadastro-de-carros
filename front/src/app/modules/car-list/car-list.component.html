@@ -1,33 +1,62 @@
-<div class="col-6">
+<div>
   <h3>Carros</h3>
-  <p>Aqui está uma lista dos carros disponíveis</p>
+  <p>Aqui está uma lista dos carros disponíveis. Clique em qualquer item para ver mais informações</p>
 </div> 
-<ng-content *ngIf="cars; else noContent"> 
-  <table class="table table-striped">
+<div class="d-flex align-items-flex-start justify-content-start">
+  <div class="col-6" *ngIf="cars; else noContent"> 
+    <table class="table table-striped">
     <thead>
-      <tr>
-        <th scope="col">Marca</th>
-        <th scope="col">Modelo</th>
-        <th scope="col">Cor</th>
-        <th scope="col">Ano</th>
-        <th scope="col">Tipo de transmissão</th>
-        <th scope="col">Info</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let car of cars">
-      <tr>
-        <td>{{car.brand}}</td>
-        <td>{{car.model}}</td>
-        <td>{{car.color}}</td>
-        <td>{{car.carYear}}</td>
-        <td>{{car.transmission}}</td>
-        <td>
-          <a href="/cars/{{car.id}}"><i class="bi bi-search"></i></a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</ng-content>
+        <tr>
+          <th class="text-center" scope="col">Marca</th>
+          <th class="text-center" scope="col">Modelo</th>
+          <th class="text-center" scope="col">Modificar</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let car of cars">
+        <tr (click)="onClick(car)">
+          <td class="text-center">{{car.brand}}</td>
+          <td class="text-center">{{car.model}}</td>
+          <td class="text-center">
+            <div class="btn-group">
+              <button class="btn btn-primary" (click)="update(car.id)">
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+              
+              <button class="btn btn-danger" (click)="delete(car.id)">
+                <i class="bi bi-trash-fill"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-container [ngTemplateOutlet]="showTemplate">
+  </ng-container>
+</div>
+
+<ng-template #carInfo>
+  <div class="container">
+    <h4>Sobre o modelo</h4>
+    <dl>
+      <dt>Veículo</dt>
+      <dl>{{car.brand}} {{car.model}}</dl>
+      <dt>Tipo de transmissão</dt>
+      <dl>{{car.transmission}}</dl>
+      <dt>Cor</dt>
+      <dl>{{car.color}}</dl>
+      <dt>Ano de fabricação</dt>
+      <dl>{{car.carYear}}</dl>
+      <dt>Preço atual</dt>
+      <dl>{{car.price | currency: 'BRL': 'symbol': '1.2-2': 'pt'}}</dl>
+    </dl>
+  </div>
+</ng-template>
+<ng-template #carUpdate>
+  <div class="col-8">
+  </div>
+</ng-template>
+
 <ng-template #noContent>
   <p>Nenhum veículo disponível!</p>
   <p>Tente mais tarde</p>

@@ -22,8 +22,12 @@ export class CarApiService {
     return this.http.post(`${environment.carAPI}/cars`, car);
   }
 
-  putCar(car: Car, id: number) {
-    return this.http.put(`${environment.carAPI}/cars/${id}`, car);
+  putPatchCar(car: Car, id: number) {
+    if (car.brand && car.model && car.color && car.transmission && car.carYear)
+      return this.http.put(`${environment.carAPI}/cars/${id}`, car);
+    else {
+      return this.http.patch(`${environment.carAPI}/cars/${id}`, car);
+    }
   }
 
   deleteCar(id: number) {
