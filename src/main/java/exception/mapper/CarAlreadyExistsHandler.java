@@ -1,0 +1,20 @@
+package exception.mapper;
+
+import exception.CarAlreadyExistsExcepiton;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.ext.ExceptionMapper;
+import jakarta.ws.rs.ext.Provider;
+
+import static jakarta.ws.rs.client.Entity.entity;
+
+@Provider
+public class CarAlreadyExistsHandler implements ExceptionMapper<CarAlreadyExistsExcepiton> {
+
+    @Override
+    public Response toResponse(CarAlreadyExistsExcepiton exception) {
+        return Response
+                .status(Response.Status.CONFLICT)
+                .entity(exception.getMessage())
+                .build();
+    }
+}
