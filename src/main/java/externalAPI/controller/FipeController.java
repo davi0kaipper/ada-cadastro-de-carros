@@ -1,5 +1,10 @@
 package externalAPI.controller;
 
+import java.util.List;
+
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.jboss.resteasy.reactive.RestPath;
+
 import externalAPI.service.FipeService;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -7,10 +12,6 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.eclipse.microprofile.openapi.annotations.media.Schema;
-import org.jboss.resteasy.reactive.RestPath;
-
-import java.util.List;
 
 @Schema(hidden = true)
 @Path("/fipe")

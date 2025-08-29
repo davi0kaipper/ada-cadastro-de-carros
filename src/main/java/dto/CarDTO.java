@@ -1,12 +1,10 @@
 package dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public record CarDTO(
-    @JsonProperty("id")
-    int id,
     @JsonProperty("brand")
     String brand,
     @JsonProperty("model")
