@@ -1,6 +1,6 @@
-package exception;
+package exceptions;
 
-public class CarAlreadyExistsExcepiton extends RuntimeException{
+public class CarAlreadyExistsExcepiton extends RuntimeException {
 
     public CarAlreadyExistsExcepiton(String message) {
         super(message);

@@ -1,14 +1,33 @@
 package repository;
 
+import java.math.BigDecimal;
+import java.util.Optional;
+
 import dtos.CarDTO;
 import enums.CarType;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import io.quarkus.panache.common.Parameters;
 import jakarta.enterprise.context.ApplicationScoped;
 import models.Car;
 
 @ApplicationScoped
 public class CarRepository implements PanacheRepository<Car> {
-    public void createFromDto(CarDTO carDTO) {
+    public Optional<Car> findByModelYearPriceColor(
+        String model,
+        int carYear,
+        BigDecimal price,
+        String color
+    ){
+        return find(
+            "model = :model and carYear = :carYear and price = :price and color = :color",
+            Parameters.with("model", model)
+                .and("carYear", carYear)
+                .and("price", price)
+                .and("color", color)
+        ).firstResultOptional();
+    }
+
+    public Car createFromDto(CarDTO carDTO) {
         var car = new Car();
         car.brand = carDTO.brand();
         car.model = carDTO.model();
@@ -17,6 +36,7 @@ public class CarRepository implements PanacheRepository<Car> {
         car.carYear = carDTO.year();
         car.price = carDTO.price();
         persist(car);
+        return car;
     }
 
     public void update(Long id, CarDTO carDTO) {

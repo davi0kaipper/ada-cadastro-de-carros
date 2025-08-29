@@ -5,6 +5,7 @@ import org.jboss.resteasy.reactive.RestPath;
 import api.requests.CarRequestValidator;
 import dtos.CarDTO;
 import dtos.PresentCar;
+import exceptions.CarAlreadyExistsExcepiton;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -48,12 +49,23 @@ public class CarsController {
     public Response create(
         @Valid
         @ConvertGroup(to = ValidationGroups.PostAndPut.class)
-        CarRequestValidator car
-    ){
-        var carDTO = CarDTO.fromCarRequestValidator(car);
-        carRepository.createFromDto(carDTO);
+        CarRequestValidator carRequest
+    ) throws CarAlreadyExistsExcepiton {
+        var carDTO = CarDTO.fromCarRequestValidator(carRequest);
+        var carAlreadyExists = carRepository.findByModelYearPriceColor(
+            carDTO.model(),
+            carDTO.year(),
+            carDTO.price(),
+            carDTO.color()
+        ).isPresent();
+
+        if (carAlreadyExists) {
+            throw new CarAlreadyExistsExcepiton("Este carro já existe.");
+        }
+
+        var car = carRepository.createFromDto(carDTO);
         
-        return Response.status(Response.Status.CREATED).entity(car.brand).build();
+        return Response.status(Response.Status.CREATED).entity(car).build();
     }
 
     @PUT
@@ -63,8 +75,9 @@ public class CarsController {
         @RestPath Long id,
         @Valid
         @ConvertGroup(to = ValidationGroups.PostAndPut.class)
-        CarDTO carDTO
+        CarRequestValidator carRequest
     ){
+        var carDTO = CarDTO.fromCarRequestValidator(carRequest);
         carRepository.update(id, carDTO);
         return Response.status(Response.Status.OK).build();
     }
@@ -76,8 +89,9 @@ public class CarsController {
         @RestPath Long id,
         @Valid
         @ConvertGroup(to = ValidationGroups.Patch.class)
-        CarDTO carDTO
+        CarRequestValidator carRequest
     ){
+        var carDTO = CarDTO.fromCarRequestValidator(carRequest);
         carRepository.update(id, carDTO);
         return Response.status(Response.Status.OK).build();
     }

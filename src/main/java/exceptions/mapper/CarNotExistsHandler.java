@@ -1,6 +1,6 @@
-package exception.mapper;
+package exceptions.mapper;
 
-import exception.CarNotExistsException;
+import exceptions.CarNotExistsException;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
@@ -11,8 +11,8 @@ public class CarNotExistsHandler implements ExceptionMapper<CarNotExistsExceptio
     @Override
     public Response toResponse(CarNotExistsException exception) {
         return Response
-                .status(Response.Status.NOT_FOUND)
-                .entity(exception.getMessage())
-                .build();
+            .status(Response.Status.NOT_FOUND)
+            .entity(exception.getMessage())
+            .build();
     }
 }
