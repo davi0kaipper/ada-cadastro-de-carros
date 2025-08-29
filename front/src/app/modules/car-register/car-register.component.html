@@ -34,7 +34,7 @@
     </div>
     <ng-container *ngIf="submitted" #submitContainer></ng-container>
     <div class="form-group">
-      <button [class]="btnType" type="submit" [disabled]="carForm.invalid">Cadastrar</button>
+      <button [class]="btnType" type="submit" [disabled]="carForm.invalid && !id">Cadastrar</button>
     </div>
   </form>
 </div>

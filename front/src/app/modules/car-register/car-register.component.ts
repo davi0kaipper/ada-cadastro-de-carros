@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewContainerRef, TemplateRef } from '@angular/core';
+import { Component, Input, ViewChild, ViewContainerRef, TemplateRef } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CarApiService } from '../../services/car-api.service';
@@ -17,6 +17,8 @@ export class CarRegisterComponent {
   @ViewChild('success') success!: TemplateRef<any>;
   @ViewChild('fail') fail!: TemplateRef<any>;
   showTemplate!: TemplateRef<any>;
+
+  @Input() id!: number;
 
   constructor(private carApiService: CarApiService) {
     this.btnType = 'btn btn-secondary mt-4';
@@ -48,7 +50,7 @@ export class CarRegisterComponent {
   onSubmit() {
     this.submitted = true;
     let car: Car = this.carForm.value;
-    if (car.id) { this.carApiService.putPatchCar(car, car.id).subscribe(response => {
+    if (this.id) { this.carApiService.putPatchCar(car, this.id).subscribe(response => {
                     console.log(response);
                     this.btnType = 'btn btn-success mt-4';
                     this.submitContainer.createEmbeddedView(this.success);

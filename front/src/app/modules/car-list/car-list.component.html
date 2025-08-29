@@ -18,7 +18,7 @@
           <td class="text-center" (click)="onClick(car)">{{car.model}}</td>
           <td class="text-center">
             <div class="btn-group">
-              <button class="btn btn-primary" (click)="update(car.id)">
+              <button class="btn btn-primary" (click)="update(car)">
                 <i class="bi bi-pencil-fill"></i>
               </button>
               
@@ -36,8 +36,8 @@
 </div>
 
 <ng-template #carInfo>
-  <div class="col-4">
-    <div class="col-8 ml-5 pt-2 border border-info rounded" style="background-color: #eeeeee">
+  <div class="col-5">
+    <div class="col-10 pt-2 border border-info rounded" style="background-color: #eeeeee">
       <h4>Sobre o automóvel</h4>
       <dl>
         <dt>Veículo</dt>
@@ -55,8 +55,12 @@
   </div>
 </ng-template>
 <ng-template #carUpdate>
-  <div class="col-4">
-    <app-car-update></app-car-update>
+  <div class="col-5">
+    <div class="col-xs">
+    <h4>Atualizar dados</h4>
+    <p>Atualizando o veículo {{car.brand}} {{car.model}}</p>
+    <app-car-register [id]="car.id"></app-car-register>
+    </div>
   </div>
 </ng-template>
 

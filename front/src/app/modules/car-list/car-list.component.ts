@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild, TemplateRef, LOCALE_ID } from '@angular/core';
 import { NgIf, NgFor, NgTemplateOutlet, CurrencyPipe, registerLocaleData } from '@angular/common';
 import { CarApiService } from '../../services/car-api.service';
-import { CarUpdateComponent } from '../car-register/car-update.component';
+import { CarRegisterComponent } from '../car-register/car-register.component';
 import localePt from '@angular/common/locales/pt'
 
 registerLocaleData(localePt, 'pt');
 
 @Component({
   selector: 'app-car-list',
-  imports: [ NgIf, NgFor, NgTemplateOutlet, CurrencyPipe ],
+  imports: [ NgIf, NgFor, NgTemplateOutlet, CurrencyPipe, CarRegisterComponent ],
   templateUrl: './car-list.component.html',
   providers: [ CarApiService ]
 })
@@ -31,9 +31,9 @@ export class CarListComponent implements OnInit {
     this.showTemplate = this.carInfo;
   }
 
-  update(id: number) {
+  update(car: Car) {
     this.showTemplate = this.carUpdate;
-//    this.carApiService.putPatchCar(id, car);
+    this.car = car;
   }
 
   delete(id: number) {
