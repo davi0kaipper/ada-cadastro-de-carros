@@ -37,19 +37,21 @@
 
 <ng-template #carInfo>
   <div class="col-4">
-    <h4>Sobre o automóvel</h4>
-    <dl>
-      <dt>Veículo</dt>
-      <dl>{{car.brand}} {{car.model}}</dl>
-      <dt>Tipo de transmissão</dt>
-      <dl>{{car.transmission}}</dl>
-      <dt>Cor</dt>
-      <dl>{{car.color}}</dl>
-      <dt>Ano de fabricação</dt>
-      <dl>{{car.carYear}}</dl>
-      <dt>Preço atual</dt>
-      <dl>{{car.price | currency: 'BRL': 'symbol': '1.2-2': 'pt'}}</dl>
-    </dl>
+    <div class="col-8 ml-5 pt-2 border border-info rounded" style="background-color: #eeeeee">
+      <h4>Sobre o automóvel</h4>
+      <dl>
+        <dt>Veículo</dt>
+        <dl>{{car.brand}} {{car.model}}</dl>
+        <dt>Tipo de transmissão</dt>
+        <dl>{{car.transmission}}</dl>
+        <dt>Cor</dt>
+        <dl>{{car.color}}</dl>
+        <dt>Ano de fabricação</dt>
+        <dl>{{car.carYear}}</dl>
+        <dt>Preço atual</dt>
+        <dl>{{car.price | currency: 'BRL': 'symbol': '1.2-2': 'pt'}}</dl>
+      </dl>
+    </div>
   </div>
 </ng-template>
 <ng-template #carUpdate>
