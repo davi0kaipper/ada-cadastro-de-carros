@@ -1,10 +1,11 @@
 package externalAPI.client;
 
-import externalAPI.model.Brand;
-import externalAPI.model.Price;
-import externalAPI.model.Model;
-import externalAPI.model.Year;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+
+import externalAPI.model.Brand;
+import externalAPI.model.Model;
+import externalAPI.model.Price;
+import externalAPI.model.Year;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
