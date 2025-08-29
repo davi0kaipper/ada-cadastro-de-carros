@@ -74,7 +74,7 @@ public class Car {
         return carYear;
     }
 
-    public void setYear(int ano) {
+    public void setYear(int carYear) {
         this.carYear = carYear;
     }
 
