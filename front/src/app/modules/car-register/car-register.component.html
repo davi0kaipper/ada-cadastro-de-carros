@@ -1,8 +1,7 @@
-<h3>Área de cadastro</h3>
 <p>Insira os dados do carro:</p>
 
 <div class="col-6">
-  <form [formGroup]="carForm" type="submit">
+  <form [formGroup]="carForm" (ngSubmit)="onSubmit()" (ngModelChange)="onChange()">
     <div class="form-group mt-2">
       <label>Marca</label>
       <input class="form-control" type="text" id="brand" name="brand" formControlName="brand" />
@@ -26,9 +25,22 @@
       <label>Ano de fabricação</label>
       <input class="form-control" type="text" id="carYear" name="carYear" formControlName="carYear" />
     </div>
-    <div class="btn-group">
-      <button class="btn btn-primary mt-4" type="submit" [disabled]="carForm.invalid" (click)="onSubmit()">Cadastrar</button>
+    <label>Preço do automóvel</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text">R$</div>
+      </div>
+      <input class="form-control" type="text" id="price" name="price" formControlName="price" />
+    </div>
+    <ng-container *ngIf="submitted" #submitContainer></ng-container>
+    <div class="form-group">
+      <button [class]="btnType" type="submit" [disabled]="carForm.invalid && !id">Cadastrar</button>
     </div>
   </form>
 </div>
-
+<ng-template #success>
+  <small style="color: green">Dados atualizados com sucesso!</small>
+</ng-template>
+<ng-template #fail>
+  <small style="color: red">Não foi possível atualizar os dados. Tente novamente</small>
+<ng-template>
