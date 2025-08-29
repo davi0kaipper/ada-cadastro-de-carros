@@ -48,21 +48,26 @@ export class CarRegisterComponent {
   onSubmit() {
     this.submitted = true;
     let car: Car = this.carForm.value;
+    if (car.id) { this.carApiService.putPatchCar(car, car.id).subscribe(response => {
+                    console.log(response);
+                    this.btnType = 'btn btn-success mt-4';
+                    this.submitContainer.createEmbeddedView(this.success);
+                  },
+                  error => {
+                    console.log(error);
+                    this.btnType = 'btn btn-danger mt-4';
+                    this.submitContainer.createEmbeddedView(this.fail);
+                  }) }
+    else { this.carApiService.postCar(car).subscribe(response => {
+                    console.log(response);
+                    this.btnType = 'btn btn-success mt-4';
+                    this.submitContainer.createEmbeddedView(this.success);
+                  },
+                  error => {
+                    console.log(error);
+                    this.btnType = 'btn btn-danger mt-4';
+                    this.submitContainer.createEmbeddedView(this.fail);
+                  }) }
+  } 
 
-    this.carApiService.postCar(car).subscribe(
-      response => {
-        console.log(response);
-        this.btnType = 'btn btn-success mt-4';
-        this.submitContainer.createEmbeddedView(this.success);
-      },
-      error => {
-        console.log(error);
-        this.btnType = 'btn btn-danger mt-4';
-        this.submitContainer.createEmbeddedView(this.fail);
-      }
-    )
-
-    this.carForm.reset();
-
-  }
 }

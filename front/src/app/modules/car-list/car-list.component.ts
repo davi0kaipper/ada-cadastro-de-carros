@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, TemplateRef, LOCALE_ID } from '@angular/core';
 import { NgIf, NgFor, NgTemplateOutlet, CurrencyPipe, registerLocaleData } from '@angular/common';
 import { CarApiService } from '../../services/car-api.service';
+import { CarUpdateComponent } from '../car-register/car-update.component';
 import localePt from '@angular/common/locales/pt'
 
 registerLocaleData(localePt, 'pt');
