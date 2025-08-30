@@ -1,9 +1,12 @@
 package dtos;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.math.BigDecimal;
 
 import models.Car;
 
+@JsonInclude
 public record PresentCar(
     Long id,
     String brand,
