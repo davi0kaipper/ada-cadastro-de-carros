@@ -2,7 +2,7 @@ package exceptions;
 
 public class CarNotExistsException extends RuntimeException {
 
-    public CarNotExistsException(String message) {
-        super(message);
+    public CarNotExistsException() {
+        super("Um carro com esse id não existe.");
     }
 }
