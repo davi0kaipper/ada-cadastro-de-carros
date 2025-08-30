@@ -3,27 +3,56 @@
 <div class="col-6">
   <form [formGroup]="carForm" (ngSubmit)="onSubmit()" (ngModelChange)="onChange()">
     <div class="form-group mt-2">
-      <label>Marca</label>
-      <input class="form-control" type="text" id="brand" name="brand" formControlName="brand" />
+      <label>Marca</label> <br>
+      <mat-form-field>
+        <mat-select
+          formControlName="brand"
+          (selectionChange)="onBrandChange($event)"
+          placeholder="Selecione uma marca"
+        >
+          <mat-option *ngFor="let brand of brands" [value]="brand">
+            {{ brand != null ? brand.name : "oi" }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     <div class="form-group mt-2">
-      <label>Modelo</label>
-      <input class="form-control" type="text" id="model" name="model" formControlName="model" />
+      <label>Modelo</label> <br>
+      <mat-form-field>
+        <mat-select
+          formControlName="model"
+          placeholder="Selecione um modelo"
+          [matTooltip]="carForm.value.brand == null ? 'Você precisa selecionar uma marca primeiro' : null">
+          <mat-option *ngFor="let model of models" [value]="model">
+            {{ model.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     <div class="form-group mt-2">
       <label>Cor</label>
-      <input class="form-control" type="text" id="color" name="color" formControlName="color" />
+      <input
+        class="form-control"
+        type="text"
+        id="color"
+        name="color"
+        formControlName="color"
+        placeholder="Entre uma cor, ex.: azul, amarelo"
+      />
     </div>
     <div class="form-group mt-2">
-      <label>Tipo de transmissão</label>
-      <select class="form-control" id="transmission" name="transmission" formControlName="transmission">
-        <option value="Automático">automatico</option>
-        <option value="Manual">manual</option>
-      </select>
+      <label>Tipo de transmissão</label> <br>
+      <mat-form-field>
+        <mat-select formControlName="transmission">
+          <mat-option *ngFor="let transmissionType of transmissionTypes" [value]="transmissionType">
+            {{ transmissionType.presentableName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     <div class="form-group mt-2">
       <label>Ano de fabricação</label>
-      <input class="form-control" type="text" id="carYear" name="carYear" formControlName="carYear" />
+      <input class="form-control" type="text" id="year" name="year" formControlName="year" />
     </div>
     <label>Preço do automóvel</label>
     <div class="input-group">

@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, TemplateRef, LOCALE_ID } from '@angular/core';
-import { NgIf, NgFor, NgTemplateOutlet, CurrencyPipe, registerLocaleData } from '@angular/common';
+import { CurrencyPipe, NgFor, NgIf, NgTemplateOutlet, registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CarApiService } from '../../services/car-api.service';
 import { CarRegisterComponent } from '../car-register/car-register.component';
-import localePt from '@angular/common/locales/pt'
 
 registerLocaleData(localePt, 'pt');
 
@@ -39,5 +39,4 @@ export class CarListComponent implements OnInit {
   delete(id: number) {
     this.carApiService.deleteCar(id).subscribe(() => this.ngOnInit());
   }
-
 }
