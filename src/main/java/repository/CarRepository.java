@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import dtos.CarDTO;
 import enums.CarType;
+import exceptions.CarNotExistsException;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import io.quarkus.panache.common.Parameters;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -39,22 +40,32 @@ public class CarRepository implements PanacheRepository<Car> {
         return car;
     }
 
-    public void update(Long id, CarDTO carDTO) {
-        var car = findById(id);
+    public Car update(Long id, CarDTO carDTO) {
+        var carOpt = findByIdOptional(id);
+        if (carOpt.isEmpty()) {
+            throw new CarNotExistsException();
+        }
+        var car = carOpt.get();
         car.brand = this.nullSafeUpdate(car.brand, carDTO.brand());
         car.model = this.nullSafeUpdate(car.model, carDTO.model());
         car.color = this.nullSafeUpdate(car.color, carDTO.color());
         car.transmission = this.nullSafeUpdate(
             car.transmission,
-            carDTO.transmission().transform(CarType::fromString)
+            this.getDtoTransmission(carDTO.transmission())
         );
         car.carYear = this.nullSafeUpdate(car.carYear, carDTO.year());
         car.price = this.nullSafeUpdate(car.price, carDTO.price());
         persist(car);
+        return car;
     }
 
     private <T> T nullSafeUpdate(T currentValue, T newValue) {
         return newValue != null ? newValue : currentValue;
+    }
+
+    private CarType getDtoTransmission(String dtoTransmission) {
+        var transmission = dtoTransmission != null ? dtoTransmission.transform(CarType::fromString) : null;
+        return transmission;
     }
 }
 

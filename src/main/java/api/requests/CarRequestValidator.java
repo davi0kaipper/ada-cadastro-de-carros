@@ -14,6 +14,7 @@ import jakarta.validation.constraints.Size;
 import validation.ValidationGroups;
 
 public class CarRequestValidator {
+    @NotNull(message="o campo brand não pode ser nulo", groups=ValidationGroups.PostAndPut.class)
     @NotBlank(groups = ValidationGroups.PostAndPut.class)
     @Size(
         groups = ValidationGroups.PostAndPut.class,
@@ -21,9 +22,9 @@ public class CarRequestValidator {
         min=3,
         max=20
     )
-    @Null(groups = ValidationGroups.Patch.class)
     public String brand;
 
+    @NotNull(message="o campo model não pode ser nulo", groups=ValidationGroups.PostAndPut.class)
     @NotBlank(groups = ValidationGroups.PostAndPut.class)
     @Size(
         groups = ValidationGroups.PostAndPut.class,
@@ -31,9 +32,9 @@ public class CarRequestValidator {
         min=3,
         max=20
     )
-    @Null(groups = ValidationGroups.Patch.class)
     public String model;
 
+    @NotNull(message="o campo color não pode ser nulo", groups=ValidationGroups.PostAndPut.class)
     @NotBlank(groups = ValidationGroups.PostAndPut.class)
     @Size(
         groups = ValidationGroups.PostAndPut.class,
@@ -41,21 +42,19 @@ public class CarRequestValidator {
         min=3,
         max=20
     )
-    @Null(groups = ValidationGroups.Patch.class)
     public String color;
 
+    @NotNull(message="o campo transmission não pode ser nulo", groups=ValidationGroups.PostAndPut.class)
     @NotBlank(groups = ValidationGroups.PostAndPut.class)
     @Pattern(regexp="MANUAL|AUTOMATICO", message="o valor do campo transmission deve ser 'MANUAL' ou 'AUTOMATICO'")
-    @Null(groups = ValidationGroups.Patch.class)
     public String transmission;
 
-    @NotNull
+    @NotNull(message="o campo year não pode ser nulo", groups=ValidationGroups.PostAndPut.class)
     @Null(groups = ValidationGroups.Patch.class)
     @Range(min=1884, max=2030)
     public Integer year;
     
-    @NotNull(message="o campo price não pode ser nulo")
-    @Null(groups = ValidationGroups.Patch.class)
+    @NotNull(message="o campo price não pode ser nulo", groups=ValidationGroups.PostAndPut.class)
     @DecimalMin(value="0.0", inclusive=false)
     @DecimalMax("85320000000.0")
     public BigDecimal price;

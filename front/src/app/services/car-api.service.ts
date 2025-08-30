@@ -19,6 +19,7 @@ export class CarApiService {
   }
 
   postCar(car: Car) {
+    console.log(car);
     return this.http.post(`${environment.carAPI}/cars`, car);
   }
 

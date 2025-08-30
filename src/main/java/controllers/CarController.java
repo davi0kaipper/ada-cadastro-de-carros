@@ -6,6 +6,7 @@ import api.requests.CarRequestValidator;
 import dtos.CarDTO;
 import dtos.PresentCar;
 import exceptions.CarAlreadyExistsExcepiton;
+import exceptions.CarNotExistsException;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -26,7 +27,7 @@ import validation.ValidationGroups;
 @Path("/cars")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class CarsController {
+public class CarController {
     private @Inject CarRepository carRepository;
 
     @GET
@@ -39,8 +40,12 @@ public class CarsController {
     @GET
     @Path("/{id}")
     public Response getById(@RestPath Long id) {
+        var carOpt = carRepository.findByIdOptional(id);
+        if (carOpt.isEmpty()) {
+            throw new CarNotExistsException();
+        }
         return Response.status(Response.Status.OK)
-            .entity(PresentCar.from(carRepository.findById(id)))
+            .entity(PresentCar.from(carOpt.get()))
             .build();
     }
 
@@ -58,13 +63,10 @@ public class CarsController {
             carDTO.price(),
             carDTO.color()
         ).isPresent();
-
         if (carAlreadyExists) {
             throw new CarAlreadyExistsExcepiton("Este carro já existe.");
         }
-
         var car = carRepository.createFromDto(carDTO);
-        
         return Response.status(Response.Status.CREATED).entity(car).build();
     }
 
@@ -78,8 +80,8 @@ public class CarsController {
         CarRequestValidator carRequest
     ){
         var carDTO = CarDTO.fromCarRequestValidator(carRequest);
-        carRepository.update(id, carDTO);
-        return Response.status(Response.Status.OK).build();
+        var car = carRepository.update(id, carDTO);
+        return Response.status(Response.Status.OK).entity(car).build();
     }
 
     @PATCH
@@ -92,8 +94,8 @@ public class CarsController {
         CarRequestValidator carRequest
     ){
         var carDTO = CarDTO.fromCarRequestValidator(carRequest);
-        carRepository.update(id, carDTO);
-        return Response.status(Response.Status.OK).build();
+        var car = carRepository.update(id, carDTO);
+        return Response.status(Response.Status.OK).entity(car).build();
     }
 
     @DELETE
