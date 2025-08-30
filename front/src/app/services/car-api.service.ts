@@ -23,7 +23,7 @@ export class CarApiService {
   }
 
   putPatchCar(car: Car, id: number) {
-    if (car.brand && car.model && car.color && car.transmission && car.carYear && car.price)
+    if (car.brand && car.model && car.color && car.transmission && car.year && car.price)
       return this.http.put(`${environment.carAPI}/cars/${id}`, car);
     else {
       return this.http.patch(`${environment.carAPI}/cars/${id}`, car);

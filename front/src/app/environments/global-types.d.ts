@@ -4,6 +4,6 @@ interface Car {
   model: string;
   color: string;
   transmission: string;
-  carYear: number;
+  year: number;
   price: number;
 }

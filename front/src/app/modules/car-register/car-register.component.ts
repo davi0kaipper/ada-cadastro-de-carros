@@ -28,7 +28,7 @@ export class CarRegisterComponent {
       model: new FormControl('', Validators.required),
       color: new FormControl('', Validators.required),
       transmission: new FormControl('', Validators.required),
-      carYear: new FormControl('2000', [Validators.minLength(4), Validators.maxLength(5), Validators.pattern(/^[0-9]*$/)]),
+      year: new FormControl('2000', [Validators.minLength(4), Validators.maxLength(5), Validators.pattern(/^[0-9]*$/)]),
       price: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/)])
     })
 
