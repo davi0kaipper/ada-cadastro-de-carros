@@ -1,9 +1,12 @@
 package dtos;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.math.BigDecimal;
 
 import api.requests.CarRequestValidator;
 
+@JsonInclude
 public record CarDTO(
     String brand,
     String model,
