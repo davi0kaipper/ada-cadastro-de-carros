@@ -57,12 +57,7 @@ public class CarController {
         CarRequestValidator carRequest
     ) throws CarAlreadyExistsExcepiton {
         var carDTO = CarDTO.fromCarRequestValidator(carRequest);
-        var carAlreadyExists = carRepository.findByModelYearPriceColor(
-            carDTO.model(),
-            carDTO.year(),
-            carDTO.price(),
-            carDTO.color()
-        ).isPresent();
+        var carAlreadyExists = carRepository.findSameCar(carDTO).isPresent();
         if (carAlreadyExists) {
             throw new CarAlreadyExistsExcepiton("Este carro já existe.");
         }
