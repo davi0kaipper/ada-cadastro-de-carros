@@ -1,6 +1,5 @@
 package repository;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 
 import dtos.CarDTO;
@@ -13,19 +12,24 @@ import models.Car;
 
 @ApplicationScoped
 public class CarRepository implements PanacheRepository<Car> {
-    public Optional<Car> findByModelYearPriceColor(
-        String model,
-        int carYear,
-        BigDecimal price,
-        String color
-    ){
-        return find(
-            "model = :model and carYear = :carYear and price = :price and color = :color",
-            Parameters.with("model", model)
-                .and("carYear", carYear)
-                .and("price", price)
-                .and("color", color)
-        ).firstResultOptional();
+    public Optional<Car> findSameCar(CarDTO carDTO){
+        var query = """
+            WHERE brand = :brand
+            AND model = :model
+            AND color = :color
+            AND transmission = :transmission
+            AND carYear = :carYear
+            AND price = :price
+        """;
+
+        var parameters = Parameters.with("brand", carDTO.brand())
+            .and("model", carDTO.model())
+            .and("color", carDTO.color())
+            .and("transmission", carDTO.transmission().transform(CarType::fromString))
+            .and("carYear", carDTO.year())
+            .and("price", carDTO.price());
+
+        return find(query, parameters).firstResultOptional();
     }
 
     public Car createFromDto(CarDTO carDTO) {
