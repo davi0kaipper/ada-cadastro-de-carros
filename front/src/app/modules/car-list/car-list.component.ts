@@ -2,13 +2,13 @@ import { CurrencyPipe, NgFor, NgIf, NgTemplateOutlet, registerLocaleData } from 
 import localePt from '@angular/common/locales/pt';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CarApiService } from '../../services/car-api.service';
-import { CarRegisterComponent } from '../car-register/car-register.component';
+import { CarFormComponent } from '../../shared/car-form.component';
 
 registerLocaleData(localePt, 'pt');
 
 @Component({
   selector: 'app-car-list',
-  imports: [ NgIf, NgFor, NgTemplateOutlet, CurrencyPipe, CarRegisterComponent ],
+  imports: [ NgIf, NgFor, NgTemplateOutlet, CurrencyPipe, CarFormComponent ],
   templateUrl: './car-list.component.html',
   providers: [ CarApiService ]
 })
