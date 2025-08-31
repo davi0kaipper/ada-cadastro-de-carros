@@ -1,67 +1,66 @@
-# ada-cadastro-de-carros
+# Cadastro de Carros
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+## Resumo da Aplicação
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+A aplicação "Cadastro de Carros" permite ao usuário criar seu cadastro próprio de carros.
 
-## Running the application in dev mode
+Foi disponibilizado um conjunto extenso de opções de marcas e modelos de carros através da tabela FIPE para auxiliar as operações.
 
-You can run your application in dev mode that enables live coding using:
+Disponibilizamos o acesso à aplicação através de API REST e um frontend integrado ao projeto. Na página inicial do frontend, é possível listar os carros cadastrados e cadastrar novos.
 
-```shell script
-./mvnw quarkus:dev
-```
+O sistema conta com uma plataforma externa (Frontend) que permite ao usuário cadastrar, consultar, alterar e excluir seus carros.
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+## Parâmetros
 
-## Swagger documentation
-Swagger UI: http://localhost:8080/q/swagger-ui
+O sistema conta com seis parâmetros para cadastro de carros:
 
-OpenAPI JSON: http://localhost:8080/q/openapi
+- Marca;
+- Modelo;
+- Cor;
+- Tipo de transmissão;
+- Ano de Fabricação;
+- Preço.
 
-## Packaging and running the application
+A aplicação expõe suas funcionalidades através de endpoints REST.
 
-The application can be packaged using:
+## Tecnologias utilizadas
 
-```shell script
-./mvnw package
-```
+- Java;
+- Quarkus;
+- Maven;
+- HTML;
+- CSS;
+- Angular;
+- JavaScript;
+- Swagger;
+- H2.
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+## Instalação e execução
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+Para rodar o projeto é necessário ter o Node.js e o Maven instalados na máquina.
 
-If you want to build an _über-jar_, execute the following command:
+Backend - vá na raiz do projeto e rode os comandos:
+- mvn install (para instalar as dependências do backend)
+- mvn quarkus:dev (para rodar o backend)
 
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
-```
+Frontend - vá na pasta front e rode o comando:
+- npm install (para instalar as dependências do frontend)
+- ⁠npm run start (para rodar o frontend)
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+## Como utilizar a aplicação
 
-## Creating a native executable
+Recomendamos utilizar o Frontend integrado ao projeto. Em sua página inicial, é possível acessar os carros cadastrados e a funcionalidade de novos cadastramentos.
 
-You can create a native executable using:
+- Selecionado "Confira nossos Carros", será exibida a lista de carros próprios cadastrados, com as opções de alteração e exclusão.
+- Clicando em "Acesso ao Cadastro", o usuário será direcionado para a funcionalidade de cadastramento de novos carros. Os campos "Marca", "Modelo" e "Tipo de transmissão" já possuem as opções predefinidas.
 
-```shell script
-./mvnw package -Dnative
-```
+Obs: O acesso à API REST pode ser feito com o cliente da sua preferência, como cURL, Postman, Insomnia, Apidog etc. Nenhuma autenticação é necessária. Os parâmetros estão listados em ordem em **Parâmetros**.
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+## Considerações Finais
 
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
+Agradecemos ao professor Rodolfo da Ada Tech pelos conhecimentos transmitidos no curso de Quarkus, do qual esse é o nosso projeto final.
 
-You can then execute your native executable with: `./target/ada-cadastro-de-carros-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-## Provided Code
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+Davi Gonçalves Kaipper
+André Tavares De Oliveira
+Ivan De Bastos Sousa
+Matheus Benedito Mendes
