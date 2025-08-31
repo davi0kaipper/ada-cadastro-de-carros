@@ -1,59 +1,66 @@
-# Front
+# Cadastro de Carros
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12.
+## Resumo da Aplicação
 
-## Development server
+A aplicação "Cadastro de Carros" permite ao usuário criar seu cadastro próprio de carros.
 
-To start a local development server, run:
+Foi disponibilizado um conjunto extenso de opções de marcas e modelos de carros através da tabela FIPE para auxiliar as operações.
 
-```bash
-ng serve
-```
+Disponibilizamos o acesso à aplicação através de API REST e um frontend integrado ao projeto. Na página inicial do frontend, é possível listar os carros cadastrados e cadastrar novos.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+O sistema conta com uma plataforma externa (Frontend) que permite ao usuário cadastrar, consultar, alterar e excluir seus carros.
 
-## Code scaffolding
+## Parâmetros
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+O sistema conta com seis parâmetros para cadastro de carros:
 
-```bash
-ng generate component component-name
-```
+- Marca;
+- Modelo;
+- Cor;
+- Tipo de transmissão;
+- Ano de Fabricação;
+- Preço.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+A aplicação expõe suas funcionalidades através de endpoints REST.
 
-```bash
-ng generate --help
-```
+## Tecnologias utilizadas
 
-## Building
+- Java;
+- Quarkus;
+- Maven;
+- HTML;
+- CSS;
+- Angular;
+- JavaScript;
+- Swagger;
+- H2.
 
-To build the project run:
+## Instalação e execução
 
-```bash
-ng build
-```
+Para rodar o projeto é necessário ter o Node.js e o Maven instalados na máquina.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Backend - vá na raiz do projeto e rode os comandos:
+- mvn install (para instalar as dependências do backend)
+- mvn quarkus:dev (para rodar o backend)
 
-## Running unit tests
+Frontend - vá na pasta front e rode o comando:
+- npm install (para instalar as dependências do frontend)
+- ⁠npm run start (para rodar o frontend)
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Como utilizar a aplicação
 
-```bash
-ng test
-```
+Recomendamos utilizar o Frontend integrado ao projeto. Em sua página inicial, é possível acessar os carros cadastrados e a funcionalidade de novos cadastramentos.
 
-## Running end-to-end tests
+- Selecionado "Confira nossos Carros", será exibida a lista de carros próprios cadastrados, com as opções de alteração e exclusão.
+- Clicando em "Acesso ao Cadastro", o usuário será direcionado para a funcionalidade de cadastramento de novos carros. Os campos "Marca", "Modelo" e "Tipo de transmissão" já possuem as opções predefinidas.
 
-For end-to-end (e2e) testing, run:
+Obs: O acesso à API REST pode ser feito com o cliente da sua preferência, como cURL, Postman, Insomnia, Apidog etc. Nenhuma autenticação é necessária. Os parâmetros estão listados em ordem em **Parâmetros**.
 
-```bash
-ng e2e
-```
+## Considerações Finais
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Agradecemos ao professor Rodolfo da Ada Tech pelos conhecimentos transmitidos no curso de Quarkus, do qual esse é o nosso projeto final.
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Davi Gonçalves Kaipper
+André Tavares De Oliveira
+Ivan De Bastos Sousa
+Matheus Benedito Mendes
