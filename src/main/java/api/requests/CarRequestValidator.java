@@ -2,6 +2,8 @@ package api.requests;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import org.hibernate.validator.constraints.Range;
 
 import jakarta.validation.constraints.DecimalMax;
@@ -13,6 +15,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import validation.ValidationGroups;
 
+@JsonInclude
 public class CarRequestValidator {
     @NotNull(message="o campo brand não pode ser nulo", groups=ValidationGroups.PostAndPut.class)
     @NotBlank(groups = ValidationGroups.PostAndPut.class)
@@ -20,7 +23,7 @@ public class CarRequestValidator {
         groups = ValidationGroups.PostAndPut.class,
         message="o campo brand deve ser maior ou igual a 3",
         min=3,
-        max=20
+        max=50
     )
     public String brand;
 
@@ -30,7 +33,7 @@ public class CarRequestValidator {
         groups = ValidationGroups.PostAndPut.class,
         message="o campo model deve ser maior ou igual a 3",
         min=3,
-        max=20
+        max=50
     )
     public String model;
 
